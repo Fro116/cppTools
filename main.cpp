@@ -51,6 +51,11 @@ void createMain() {
   main << "}" << std::endl;
 }
 
+void createReadme() {
+  std::ofstream readme("README.md");
+  readme << "# OVERVIEW" << std::endl;
+}
+
 void createCMake(std::string project) {
   std::ofstream file("CMakeLists.txt");
   file << "cmake_minimum_required(VERSION 2.8.11)" << std::endl;
@@ -83,6 +88,7 @@ int main(int argc, char* argv[]) {
 	    createCMake(std::string(argv[3]));
 	    createMain();
 	    createGitIgnore(std::string(argv[3]));
+	    createReadMe();
 	    return 0;
 	  }
 	}
