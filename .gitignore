@@ -1,0 +1,5 @@
+#build files
+CMake*
+Makefile
+*.o
+cppTools
