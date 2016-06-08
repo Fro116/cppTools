@@ -88,7 +88,7 @@ int main(int argc, char* argv[]) {
 	    createCMake(std::string(argv[3]));
 	    createMain();
 	    createGitIgnore(std::string(argv[3]));
-	    createReadMe();
+	    createReadme();
 	    return 0;
 	  }
 	}
