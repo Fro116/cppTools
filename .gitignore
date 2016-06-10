@@ -1,6 +1,5 @@
 #build files
 CMake*
-!CMakeLists.txt
 Makefile
-*.o
+compile_commands.json
 cppTools

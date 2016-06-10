@@ -18,6 +18,8 @@ void createClass(std::string file) {
   header << "#include <cassert>" << std::endl;
   header << "#include <limits>" << std::endl;
   header << "#include <chrono>" << std::endl;
+  header << "#include <set>" << std::endl;
+  header << "#include <cstdlib>" << std::endl;
   header << "" << std::endl;
   header << "class " << file << " {" << std::endl;
   header << " public:" << std::endl;
@@ -45,6 +47,8 @@ void createMain() {
   main << "#include <cassert>" << std::endl;
   main << "#include <limits>" << std::endl;
   main << "#include <chrono>" << std::endl;
+  main << "#include <set>" << std::endl;
+  main << "#include <cstdlib>" << std::endl;
   main << "" << std::endl;
   main << "int main(int argc, char* argv[]) {" << std::endl;
   main << "" << std::endl;
@@ -69,7 +73,7 @@ void createGitIgnore(std::string project) {
   file << "#build files" << std::endl;
   file << "CMake*" << std::endl;
   file << "Makefile" << std::endl;
-  file << "*.o" << std::endl;
+  file << "compile_commands.json" << std::endl;
   file << project << std::endl;
 }
 
