@@ -3,3 +3,4 @@ CMake*
 Makefile
 compile_commands.json
 cppTools
+.clang_complete

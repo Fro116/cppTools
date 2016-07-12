@@ -24,6 +24,7 @@ void createClass(std::string file) {
   header << "" << std::endl;
   header << "class " << file << " {" << std::endl;
   header << " public:" << std::endl;
+  header << "  " << file << "();" << std::endl;
   header << " private:" << std::endl;
   header << "};" << std::endl;
   header << "" << std::endl;
