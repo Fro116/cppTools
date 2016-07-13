@@ -21,6 +21,7 @@ void createClass(std::string file) {
   header << "#include <set>" << std::endl;
   header << "#include <cstdlib>" << std::endl;
   header << "#include <tuple>" << std::endl;
+  header << "#include <map>" << std::endl;
   header << "" << std::endl;
   header << "class " << file << " {" << std::endl;
   header << " public:" << std::endl;
@@ -52,6 +53,7 @@ void createMain() {
   main << "#include <set>" << std::endl;
   main << "#include <cstdlib>" << std::endl;
   main << "#include <tuple>" << std::endl;
+  main << "#include <map>" << std::endl;
   main << "" << std::endl;
   main << "int main(int argc, char* argv[]) {" << std::endl;
   main << "" << std::endl;
