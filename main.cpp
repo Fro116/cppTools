@@ -19,9 +19,13 @@ void createClass(std::string file) {
   header << "#include <limits>" << std::endl;
   header << "#include <chrono>" << std::endl;
   header << "#include <set>" << std::endl;
+  header << "#include <unordered_set>" << std::endl;  
   header << "#include <cstdlib>" << std::endl;
   header << "#include <tuple>" << std::endl;
   header << "#include <map>" << std::endl;
+  header << "#include <unordered_map>" << std::endl;  
+  header << "#include <thread>" << std::endl;
+  header << "#include <mutex>" << std::endl;
   header << "" << std::endl;
   header << "class " << file << " {" << std::endl;
   header << " public:" << std::endl;
@@ -34,7 +38,8 @@ void createClass(std::string file) {
   std::ofstream source(file + ".cpp");
   source << "#include \"" << file << ".h\"" << std::endl;
   source << "" << std::endl;
-  source << file << "::" << file << "() {" << std::endl; 
+  source << file << "::" << file << "() {" << std::endl;
+  source << "" << std::endl;
   source << "}" << std::endl;
 }
 
@@ -51,9 +56,13 @@ void createMain() {
   main << "#include <limits>" << std::endl;
   main << "#include <chrono>" << std::endl;
   main << "#include <set>" << std::endl;
+  main << "#include <unordered_set>" << std::endl;    
   main << "#include <cstdlib>" << std::endl;
   main << "#include <tuple>" << std::endl;
   main << "#include <map>" << std::endl;
+  main << "#include <unordered_map>" << std::endl;  
+  main << "#include <thread>" << std::endl;
+  main << "#include <mutex>" << std::endl;
   main << "" << std::endl;
   main << "int main(int argc, char* argv[]) {" << std::endl;
   main << "" << std::endl;
