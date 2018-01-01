@@ -8,25 +8,6 @@ void createClass(std::string file) {
   header << "#ifndef " << file << "_" << uniqueID << std::endl;
   header << "#define " << file << "_" << uniqueID << std::endl;
   header << "" << std::endl;
-  header << "#include <iostream>" << std::endl;
-  header << "#include <string>" << std::endl;
-  header << "#include <fstream>" << std::endl;
-  header << "#include <vector>" << std::endl;
-  header << "#include <algorithm>" << std::endl;
-  header << "#include <sstream>" << std::endl;
-  header << "#include <memory>" << std::endl;
-  header << "#include <cassert>" << std::endl;
-  header << "#include <limits>" << std::endl;
-  header << "#include <chrono>" << std::endl;
-  header << "#include <set>" << std::endl;
-  header << "#include <unordered_set>" << std::endl;  
-  header << "#include <cstdlib>" << std::endl;
-  header << "#include <tuple>" << std::endl;
-  header << "#include <map>" << std::endl;
-  header << "#include <unordered_map>" << std::endl;  
-  header << "#include <thread>" << std::endl;
-  header << "#include <mutex>" << std::endl;
-  header << "" << std::endl;
   header << "class " << file << " {" << std::endl;
   header << " public:" << std::endl;
   header << "  " << file << "();" << std::endl;
@@ -45,28 +26,31 @@ void createClass(std::string file) {
 
 void createMain() {
   std::ofstream main("main.cpp");
-  main << "#include <iostream>" << std::endl;
-  main << "#include <string>" << std::endl;
-  main << "#include <fstream>" << std::endl;
-  main << "#include <vector>" << std::endl;
-  main << "#include <algorithm>" << std::endl;
-  main << "#include <sstream>" << std::endl;
-  main << "#include <memory>" << std::endl;
-  main << "#include <cassert>" << std::endl;
-  main << "#include <limits>" << std::endl;
-  main << "#include <chrono>" << std::endl;
-  main << "#include <set>" << std::endl;
-  main << "#include <unordered_set>" << std::endl;    
-  main << "#include <cstdlib>" << std::endl;
-  main << "#include <tuple>" << std::endl;
-  main << "#include <map>" << std::endl;
-  main << "#include <unordered_map>" << std::endl;  
-  main << "#include <thread>" << std::endl;
-  main << "#include <mutex>" << std::endl;
   main << "" << std::endl;
   main << "int main(int argc, char* argv[]) {" << std::endl;
   main << "" << std::endl;
   main << "}" << std::endl;
+}
+
+void addIncludes(std::ofstream& header) {
+    header << "#include <iostream>" << std::endl;
+    header << "#include <string>" << std::endl;
+    header << "#include <fstream>" << std::endl;
+    header << "#include <vector>" << std::endl;
+    header << "#include <algorithm>" << std::endl;
+    header << "#include <sstream>" << std::endl;
+    header << "#include <memory>" << std::endl;
+    header << "#include <cassert>" << std::endl;
+    header << "#include <limits>" << std::endl;
+    header << "#include <chrono>" << std::endl;
+    header << "#include <set>" << std::endl;
+    header << "#include <unordered_set>" << std::endl;
+    header << "#include <cstdlib>" << std::endl;
+    header << "#include <tuple>" << std::endl;
+    header << "#include <map>" << std::endl;
+    header << "#include <unordered_map>" << std::endl;
+    header << "#include <thread>" << std::endl;
+    header << "#include <mutex>" << std::endl;
 }
 
 void createReadme() {
@@ -79,7 +63,7 @@ void createCMake(std::string project) {
   file << "cmake_minimum_required(VERSION 2.8.11)" << std::endl;
   file << "project(" << project << ")" << std::endl;
   file << "add_executable (" << project << " main.cpp)" << std::endl;
-  file << "SET(CMAKE_CXX_FLAGS \"-std=c++11 -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-declarations -Wmissing-include-dirs -Wold-style-cast -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-overflow=5 -Wswitch-default -Wundef -Werror -Wno-unused -Wno-unused-parameter\")" << std::endl;
+  file << "SET(CMAKE_CXX_FLAGS \"-std=c++14 -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-declarations -Wmissing-include-dirs -Wold-style-cast -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-overflow=5 -Wswitch-default -Wundef -Werror -Wno-unused -Wno-unused-parameter\")" << std::endl;
 }
 
 void createGitIgnore(std::string project) {
@@ -96,7 +80,7 @@ void createGitIgnore(std::string project) {
 void createClangComplete() {
   std::ofstream file(".clang_complete");
   file << "-I/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/" << std::endl;
-  file << "--std=c++11" << std::endl;
+  file << "--std=c++14" << std::endl;
 }
 
 int main(int argc, char* argv[]) {
@@ -114,6 +98,7 @@ int main(int argc, char* argv[]) {
 	    createCMake(std::string(argv[3]));
 	    createMain();
 	    createGitIgnore(std::string(argv[3]));
+	    createClangComplete();
 	    createReadme();
 	    return 0;
 	  }
