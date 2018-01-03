@@ -64,6 +64,7 @@ void createCMake(std::string project) {
   file << "project(" << project << ")" << std::endl;
   file << "add_executable (" << project << " main.cpp)" << std::endl;
   file << "SET(CMAKE_CXX_FLAGS \"-std=c++14 -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-declarations -Wmissing-include-dirs -Wold-style-cast -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-overflow=5 -Wswitch-default -Wundef -Werror -Wno-unused -Wno-unused-parameter\")" << std::endl;
+  file << "set(CMAKE_EXPORT_COMPILE_COMMANDS ON)" << std::endl;
 }
 
 void createGitIgnore(std::string project) {
@@ -72,15 +73,8 @@ void createGitIgnore(std::string project) {
   file << "CMake*" << std::endl;
   file << "!CMakeLists.txt" << std::endl;
   file << "Makefile" << std::endl;
-  file << ".clang_complete" << std::endl;
   file << "*.DS_Store" << std::endl;
   file << project << std::endl;
-}
-
-void createClangComplete() {
-  std::ofstream file(".clang_complete");
-  file << "-I/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/" << std::endl;
-  file << "--std=c++14" << std::endl;
 }
 
 int main(int argc, char* argv[]) {
@@ -98,7 +92,6 @@ int main(int argc, char* argv[]) {
 	    createCMake(std::string(argv[3]));
 	    createMain();
 	    createGitIgnore(std::string(argv[3]));
-	    createClangComplete();
 	    createReadme();
 	    return 0;
 	  }
@@ -106,12 +99,6 @@ int main(int argc, char* argv[]) {
 	if (std::string(argv[2]) == "main") {
 	  if (argc == 3) {
 	    createMain();
-	    return 0;
-	  }
-	}
-	if (std::string(argv[2]) == ".clang_complete" || std::string(argv[2]) == "clang_complete" || std::string(argv[2]) == "clangComplete") {
-	  if (argc == 3) {
-	    createClangComplete();
 	    return 0;
 	  }
 	}
