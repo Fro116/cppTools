@@ -8,9 +8,9 @@ void createClass(std::string file) {
   header << "#pragma once" << std::endl
          << "" << std::endl
          << "class " << file << " {" << std::endl
-         << " public:" << std::endl
-         << "  " << file << "();" << std::endl
-         << " private:" << std::endl
+         << "public:" << std::endl
+         <<  file << "();" << std::endl
+         << "private:" << std::endl
          << "};" << std::endl
          << "" << std::endl;
 
