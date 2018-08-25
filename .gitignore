@@ -1,6 +1,8 @@
-#build files
-CMake*
-Makefile
-compile_commands.json
-cppTools
-.clang_complete
+# Build files
+build/
+
+# Executables
+bin/
+
+# Platform system files
+*.DS_Store

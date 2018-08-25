@@ -46,23 +46,27 @@ cmake_minimum_required(VERSION 2.8.11)
 # Project settings
 
 )"
-       << "project(" << project << ")" << std::endl
+       << "set(PROJECT_NAME " << project << ")" << std::endl
        <<
-    R"(SET(CMAKE_CXX_FLAGS "-std=c++14 -pedantic -Wall -Wextra -Wcast-align \
+    R"(project(${PROJECT_NAME})
+SET(CMAKE_CXX_FLAGS "-std=c++14 -pedantic -Wall -Wextra -Wcast-align \
                     -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization \
                     -Wformat=2 -Winit-self -Wmissing-declarations \
                     -Wmissing-include-dirs -Wold-style-cast \
                     -Woverloaded-virtual -Wredundant-decls -Wshadow \
                     -Wsign-conversion -Wsign-promo -Wstrict-overflow=5 \
-                    -Wswitch-default -Wundef -Werror -Wno-unused \
+                    -Wswitch-default -Wundef -Wno-unused -Werror \
                     -Wno-unused-parameter")
 
 # Main executable
 
-)"
-       << "add_executable(" << project << " src/main.cpp)" << std::endl
-       <<
-    R"(
+add_executable(${PROJECT_NAME} src/main.cpp)
+find_package(Boost COMPONENTS filesystem REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY
+                      ${CMAKE_CURRENT_SOURCE_DIR}/bin/release)
+
 # BOOST tests
 
 enable_testing()
@@ -109,11 +113,14 @@ BOOST_AUTO_TEST_CASE( can_build_boost )
 
 void createGitIgnore() {
   std::ofstream file(".gitignore");
-  file << "# Build files" << std::endl;
-  file << "build/" << std::endl;
-  file << std::endl;
-  file << "# Platform system files" << std::endl;
-  file << "*.DS_Store" << std::endl;
+  file << "# Build files" << std::endl
+       << "build/" << std::endl
+       << std::endl
+       << "# Executables" << std::endl
+       << "bin/" << std::endl
+       << std::endl
+       << "# Platform system files" << std::endl
+       << "*.DS_Store" << std::endl;
 }
 
 int main(int argc, char* argv[]) {
@@ -143,10 +150,8 @@ int main(int argc, char* argv[]) {
           }
         }
         if (std::string(argv[2]) == "test") {
-          if (argc == 3) {
             createTest();
             return 0;
-          }
         }
         if (std::string(argv[2]) == ".gitIgnore"
             || std::string(argv[2]) == "gitIgnore"
@@ -154,6 +159,7 @@ int main(int argc, char* argv[]) {
             || std::string(argv[2]) == ".gitignore"
             || std::string(argv[2]) == "GitIgnore") {
             createGitIgnore();
+            return 0;
         }
         if (std::string(argv[2]) == "CMake"
             || std::string(argv[2]) == "Cmake"
@@ -161,10 +167,14 @@ int main(int argc, char* argv[]) {
           if (argc == 4) {
             createCMake(std::string(argv[3]));
             return 0;
+          } else {
+            std::cout << "Missing project name" << std::endl;
+            return 1;
           }
         }
       }
     }
   }
   std::cout << "Invalid arguments" << std::endl;
+  return 1;
 }
