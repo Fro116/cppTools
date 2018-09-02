@@ -4,7 +4,6 @@
 
 void createClass(std::string file) {
   std::ofstream header(file + ".h");
-  auto uniqueID = std::chrono::system_clock::now().time_since_epoch().count();
   header << "#pragma once" << std::endl
          << "" << std::endl
          << "class " << file << " {" << std::endl
@@ -81,12 +80,9 @@ foreach(testSrc ${TEST_SRCS})
         add_executable(${testName} ${testSrc})
         target_link_libraries(${testName} ${Boost_LIBRARIES})
 
-        #I like to move testing binaries into a testBin directory
         set_target_properties(${testName} PROPERTIES
             RUNTIME_OUTPUT_DIRECTORY  ${CMAKE_CURRENT_SOURCE_DIR}/bin/test)
 
-        #Finally add it to test execution -
-        #Notice the WORKING_DIRECTORY and COMMAND
         add_test(NAME ${testName}
                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin/test
                  COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/bin/test/${testName} )
